@@ -1,6 +1,6 @@
 public class Points extends Achievement {
 
-	/*private static Points pointsInstance = null;
+	private static Points pointsInstance = null;
 	
 	public int qtd;
 
@@ -14,13 +14,12 @@ public class Points extends Achievement {
 	
 	private Points(String name, int qtd) {
 		super(name);
-		this.qtd = qtd;
-	}*/
-	public int qtd;
-	
-	public Points(String name, int qtd) {
-		super(name);
-		this.qtd += qtd;	
+		this.qtd += qtd;
 	}
 	
+	public static void setAchievementStorage(Achievement _pointsInstance)
+	{
+		pointsInstance = (Points)_pointsInstance;
+	}	
+
 }

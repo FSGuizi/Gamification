@@ -7,12 +7,15 @@ public class MemoryAchievementStorage implements AchievementStorage {
 	@Override
 	public void addAchievement(String user, Achievement a) {
 			if (usersStorageData.containsKey(user)) {
-				usersStorageData.get(user).add(a); 
-				// TODO: Verificar como garantir que exista apenas 1 badge de um determ tipo para um usuário 
+				String achievementClass = a.getClass().toString().substring(6);
+				if(getAchievementStorage(user, a.name, achievementClass) == null)
+					usersStorageData.get(user).add(a); 
+				else {
+					usersStorageData.get(user).set(usersStorageData.get(user).indexOf(a), a);
+				}
 			}
 			else {
-				usersStorageData.put(user, new ArrayList<>());
-				// TODO: Talvez utilizar setup aqui
+				usersStorageData.put(user, new ArrayList<Achievement>());
 				usersStorageData.get(user).add(a);
 			}
 	}
@@ -23,11 +26,12 @@ public class MemoryAchievementStorage implements AchievementStorage {
 	}
 
 	@Override
-	public Achievement getAchievementStorage(String user, String achievementName) {
-		for(Achievement ach: usersStorageData.get(user))
-			if(ach.name.equals(achievementName))
-				return ach;
-		return null;
+	public Achievement getAchievementStorage(String user, String achievementName, String achievmentClass) {
+	 if (usersStorageData.containsKey(user))
+		 for(Achievement aux: this.getAchievements(user))
+			 if(aux.name.equals(achievementName)) 
+				 if((aux.getClass()).toString().equals("class "+achievmentClass))
+				 	return aux;
+     return null; 
 	}
-
 }

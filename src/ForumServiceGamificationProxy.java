@@ -3,10 +3,8 @@ public class ForumServiceGamificationProxy implements ForumService {
 	 
 	private ForumService forumService;
 	
-	public AchievementStorage userAchievement;
+	public AchievementStorage userAchievement = null;
 	
-	
-	// public ForumServiceGamificationProxy(ForumService encapsulado, Achievement userAchievement) {
     public ForumServiceGamificationProxy(ForumService encapsulado, AchievementStorage userAchievement) {
 		this.forumService = encapsulado;
 		this.userAchievement = userAchievement;
@@ -16,10 +14,18 @@ public class ForumServiceGamificationProxy implements ForumService {
     // - Deve adicionar 5 pontos do tipo "CREATION". Deve adicionar o bagde "I CAN TALK"
 	public void addTopic(String user, String topic) {
 		forumService.addTopic(user, topic);
-		//Points points =  Points.getPointsInstance("CREATION", 5);
-		Points points = new Points("CREATION", 5);
+		String achievementName = "CREATION";
+		String objective = "I CAN TALK";
+		int pointsQtd = 5;
+		// Adição de achievements do tipo points
+		Achievement ach = userAchievement.getAchievementStorage(user, achievementName, "Points");
+		Points.setAchievementStorage((Points)ach);
+		Points points = Points.getPointsInstance(achievementName, pointsQtd);
 		userAchievement.addAchievement(user, points);
-		Badge badge =  new Badge("CREATION", "I CAN TALK");
+		// Adição de achievements do tipo badge
+		ach = userAchievement.getAchievementStorage(user, achievementName, "Badge");
+		Badge.setAchievementStorage((Badge)ach);
+	    Badge badge =  Badge.getBadgeInstance(achievementName, objective);
 		userAchievement.addAchievement(user, badge);
 	}
 
@@ -27,10 +33,18 @@ public class ForumServiceGamificationProxy implements ForumService {
 	// - Deve adicionar 3 pontos do tipo "PARTICIPATION". Deve adicionar o badge "LET ME ADD"
 	public void addComment(String user, String topic, String comment) {
 		forumService.addComment(user, topic, comment);
-		// Points points =  Points.getPointsInstance("PARTICIPATION", 3);
-		Points points =  new Points("PARTICIPATION", 3);
+		String achievementName = "PARTICIPATION";
+		String objective = "LET ME ADD";
+		int pointsQtd = 3;
+		// Adição de achievements do tipo points
+		Achievement ach = userAchievement.getAchievementStorage(user, achievementName, "Points");
+		Points.setAchievementStorage((Points)ach);
+		Points points =  Points.getPointsInstance(achievementName, pointsQtd);
 		userAchievement.addAchievement(user, points);
-		Badge badge =  new Badge("PARTICIPATION", "LET ME ADD");
+		// Adição de achievements do tipo badge
+		ach = userAchievement.getAchievementStorage(user, achievementName, "Badge");
+		Badge.setAchievementStorage((Badge)ach);
+	    Badge badge =  Badge.getBadgeInstance(achievementName, objective);
 		userAchievement.addAchievement(user, badge);
 	}
 
@@ -38,7 +52,12 @@ public class ForumServiceGamificationProxy implements ForumService {
 	// - Deve adicionar 1 ponto do tipo "CREATION".
 	public void likeTopic(String user, String topic, String topicUser) {
 		forumService.likeTopic(user, topic, topicUser);
-		Points points =  new Points("CREATION", 1);
+		String achievementName = "CREATION";
+		int pointsQtd = 1;
+		// Adição de achievements do tipo points
+		Achievement ach = userAchievement.getAchievementStorage(user, achievementName, "Points");
+		Points.setAchievementStorage((Points)ach);
+		Points points = Points.getPointsInstance(achievementName, pointsQtd);
 		userAchievement.addAchievement(user, points);
 	
 	}
@@ -47,8 +66,14 @@ public class ForumServiceGamificationProxy implements ForumService {
 	// - Deve adicionar 1 ponto do tipo "PARTICIPATION".
 	public void likeComment(String user, String topic, String comment, String commentUser) {
 		forumService.likeComment(user, topic, comment, commentUser);
-		Points points =  new Points("PARTICIPATION", 1);
+		String achievementName = "PARTICIPATION"; 
+		int pointsQtd = 1;
+		// Adição de achievements do tipo points 
+		Achievement ach = userAchievement.getAchievementStorage(user, achievementName, "Points");
+		Points.setAchievementStorage((Points)ach);
+		Points points = Points.getPointsInstance(achievementName, pointsQtd);
 		userAchievement.addAchievement(user, points);
+		 
 	}
 
 }

@@ -1,18 +1,15 @@
 
 public abstract class AchievementStorageFactory {
 	
-	private static AchievementStorage achievementStorage;
+	private static AchievementStorage achievementStorageInstance = null;
 	
 	public static AchievementStorage getAchievementStorage() {
-		//if(achievementStorage == null) {
-			setAchievementStorage(new MemoryAchievementStorage());
-		//}		
-		return achievementStorage;
+		return achievementStorageInstance;
 	}
 	
-	static void setAchievementStorage(AchievementStorage _achievementStorage)
+	public static void setAchievementStorage(AchievementStorage _achievementStorage)
 	{
-		achievementStorage = _achievementStorage;
+		achievementStorageInstance = _achievementStorage;
 	}
 	
 }

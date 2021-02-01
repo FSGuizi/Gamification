@@ -1,6 +1,6 @@
 public class Badge extends Achievement{
 	
-/*	private static Badge badgeInstance = null;
+	private static Badge badgeInstance = null;
 	
 	public String objective;
 	
@@ -16,13 +16,10 @@ public class Badge extends Achievement{
 		super(name);
 		this.objective = objective;		
 	}
-	*/
 	
-	
-	public String objective;
-	
-	public Badge(String name, String objective) {
-		super(name);
-		this.objective = objective;		
+	public static void setAchievementStorage(Achievement _badgeInstance)
+	{
+		badgeInstance = (Badge)_badgeInstance;
 	}
+	
 }

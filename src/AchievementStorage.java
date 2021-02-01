@@ -6,6 +6,6 @@ public interface AchievementStorage {
 	
 	List<Achievement> getAchievements(String user);
 	
-	Achievement getAchievementStorage(String user, String achievementName);
+	Achievement getAchievementStorage(String user, String achievementName, String achievementClass);
 	
 }
